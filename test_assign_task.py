@@ -7,19 +7,11 @@ class AssignTest(TestCase):
     def test_x(self):
         result = get_assignments()
         expected = {
-            'monday': ('alice', 'bob')
-        }
-        self.assertEqual(result, expected)
-        self.fail('x')
-
-    def test_2(self):
-        result = get_assignments()
-        expected = {
-            'monday': ('alice', 'bob'),
-            'tuesday': ('alice', 'bob'),
-            'wednesday': ('alice', 'bob'),
-            'thursday': ('alice', 'bob'),
-            'friday': ('alice', 'bob'),
+            'monday': {'pr': 'alice', 'webhelp': 'bob'},
+            'tuesday': {'pr': 'alice', 'webhelp': 'bob'},
+            'wednesday': {'pr': 'alice', 'webhelp': 'bob'},
+            'thursday': {'pr': 'alice', 'webhelp': 'bob'},
+            'friday': {'pr': 'alice', 'webhelp': 'bob'},
         }
         self.assertEqual(result, expected)
         self.fail('x')
