@@ -1,6 +1,7 @@
 import random
 
-PEOPLE= ('alice', 'bob', 'cat', 'dave')
+PEOPLE = ('alice', 'bob', 'cat', 'dave', 'edgar', 'frank', 'greg')
+JUNIOR = ('edgar', 'frank', 'greg')
 WEEK = ('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
 
 
@@ -16,6 +17,7 @@ def get_assignments():
 
 def get_people(exclude=None, number=2):
     exclude = exclude or []
+    selection_pool = PEOPLE
     pool = [x for x in PEOPLE if x not in exclude]
     result = random.sample(pool, number)
     return result
@@ -29,3 +31,7 @@ def compare_days(previous_group, group):
             webhelp = get_people([webhelp, previous_group[1]], number=1)[0]
         result = [pr, webhelp]
     return result
+
+def invalid_pair(pair):
+    if pair[0] in JUNIOR and pair[1] in JUNIOR:
+        return True

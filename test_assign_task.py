@@ -1,7 +1,7 @@
 import mock
 import random
 from unittest import TestCase
-from assign_task import get_assignments, get_people, compare_days
+from assign_task import get_assignments, get_people, compare_days, invalid_pair
 
 
 class AssignTest(TestCase):
@@ -45,3 +45,7 @@ class AssignTest(TestCase):
         group = ['dave', 'bob']
         result = compare_days(previous_group, group)
         self.assertEqual(result, ['cat', 'dave'])
+
+    def test_x(self):
+        result = invalid_pair(['edgar', 'frank'])
+        self.assertTrue(result)
