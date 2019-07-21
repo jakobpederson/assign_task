@@ -1,6 +1,6 @@
 import random
 from unittest import TestCase
-from assign_task import get_assignments, get_people
+from assign_task import get_assignments, get_people, compare_days
 
 
 class AssignTest(TestCase):
@@ -26,3 +26,9 @@ class AssignTest(TestCase):
     def test_randomly_select_people_excluding_specific_people(self):
         result = get_people(['cat', 'dave'])
         self.assertEqual(result, ['bob', 'alice'])
+
+    def test_compare_two_groups_and_reselect_if_a_person_has_the_same_position_in_both(self):
+        previous_group = ['alice', 'bob']
+        group = ['alice', 'dave']
+        result = compare_days(previous_group, group)
+        self.assertEqual(result, ['cat', 'dave'])
