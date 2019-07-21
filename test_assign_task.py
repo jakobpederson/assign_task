@@ -1,5 +1,6 @@
+import random
 from unittest import TestCase
-from assign_task import get_assignments
+from assign_task import get_assignments, get_two
 
 
 class AssignTest(TestCase):
@@ -15,3 +16,8 @@ class AssignTest(TestCase):
         }
         self.assertEqual(result, expected)
         self.fail('x')
+
+    def test_y(self):
+        random.seed(5)
+        result = get_two()
+        self.assertCountEqual(result, ('cat', 'dave'))
