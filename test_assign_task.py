@@ -32,7 +32,7 @@ class AssignTest(TestCase):
         previous_group = ['alice', 'bob']
         group = ['alice', 'dave']
         result = compare_days(previous_group, group)
-        self.assertEqual(result, ['cat', 'dave'])
+        self.assertEqual(result, ['dave', 'cat'])
 
     def test_compare_two_groups_and_reselect_if_both_people_have_already_had_those_positions(self):
         previous_group = ['alice', 'bob']

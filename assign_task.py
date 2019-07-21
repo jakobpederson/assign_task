@@ -26,6 +26,6 @@ def compare_days(previous_group, group):
         pr = group[0] if group[0] != previous_group[0] else get_people([group[0]], number=1)[0]
         webhelp = group[1] if group[1] != previous_group[1] else get_people([group[1]], number=1)[0]
         if pr == webhelp:
-            webhelp = group[1] if group[1] != previous_group[1] else get_people([webhelp], number=1)[0]
+            webhelp = get_people([webhelp, previous_group[1]], number=1)[0]
         result = [pr, webhelp]
     return result
