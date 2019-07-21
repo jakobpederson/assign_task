@@ -7,7 +7,8 @@ WEEK = ('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
 def get_assignments():
     result = {}
     for day in WEEK:
-        result[day] = {'pr': PEOPLE[0], 'webhelp': PEOPLE[1]}
+        people = get_two()
+        result[day] = {'pr': people[0], 'webhelp': people[1]}
     return result
 
 def get_two():
