@@ -1,3 +1,4 @@
+import mock
 import random
 from unittest import TestCase
 from assign_task import get_assignments, get_people, compare_days
@@ -38,3 +39,9 @@ class AssignTest(TestCase):
         group = ['alice', 'bob']
         result = compare_days(previous_group, group)
         self.assertEqual(result, ['dave', 'cat'])
+
+    def test_two_positions_cannot_be_held_by_the_same_person(self):
+        previous_group = ['dave', 'bob']
+        group = ['dave', 'bob']
+        result = compare_days(previous_group, group)
+        self.assertEqual(result, ['cat', 'dave'])
