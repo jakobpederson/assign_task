@@ -13,8 +13,8 @@ class AssignTest(TestCase):
         result = get_assignments()
         expected = {
             'monday': {'pr': 'cat', 'webhelp': 'dave'},
-            'tuesday': {'pr': 'cat', 'webhelp': 'dave'},
-            'wednesday': {'pr': 'alice', 'webhelp': 'bob'},
+            'tuesday': {'pr': 'dave', 'webhelp': 'cat'},
+            'wednesday' : {'pr': 'alice', 'webhelp': 'bob'},
             'thursday': {'pr': 'bob', 'webhelp': 'cat'},
             'friday': {'pr': 'alice', 'webhelp': 'dave'}
         }
