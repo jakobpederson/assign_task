@@ -1,4 +1,9 @@
 PEOPLE= ('alice', 'bob')
+WEEK = ('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
+
 
 def get_assignments():
-    return {'monday': PEOPLE}
+    result = {}
+    for day in WEEK:
+        result[day] = PEOPLE
+    return result
