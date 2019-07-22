@@ -1,7 +1,7 @@
 import mock
 import random
 from unittest import TestCase
-from assign_task import get_assignments, get_people, compare_days, invalid_pair
+from assign_task import get_assignments, get_people, compare_days, PEOPLE, JUNIOR
 
 
 class AssignTest(TestCase):
@@ -47,5 +47,14 @@ class AssignTest(TestCase):
         self.assertEqual(result, ['cat', 'dave'])
 
     def test_x(self):
-        result = invalid_pair(['edgar', 'frank'])
-        self.assertTrue(result)
+        result = get_assignments()
+        for key, val in result.items():
+            if val['pr'] in PEOPLE:
+                print(val['pr'])
+                print(val['webhelp'])
+                self.assertTrue(val['webhelp'] in JUNIOR)
+            else:
+                print(val['pr'])
+                print(val['webhelp'])
+                self.assertTrue(val['webhelp'] in PEOPLE)
+        self.fail('x')
