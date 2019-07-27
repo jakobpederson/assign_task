@@ -60,9 +60,12 @@ def get_week(first, second):
     compare = WEEK[0]
     for day, value in result.items():
         if day != compare:
-            if value['pr']['person'] == result[compare]['pr']['person']:
-                value['pr']['person'] = random.sample(value['pr']['source'], 1)
-            if value['webhelp']['person'] == result[compare]['webhelp']['person']:
-                value['webhelp']['person'] = random.sample(value['webhelp']['source'], 1)
+            for val in ('pr', 'webhelp'):
+                result = compare_days(value[val], result[compare][val], result)
         compare = day
+    return result
+
+def compare_days(job_1, job_2, result):
+    if job_1['person'] == job_2['person']:
+        job_1['person'] = random.sample(job_1['source'], 1)[0]
     return result

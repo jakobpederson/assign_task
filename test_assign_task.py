@@ -26,22 +26,28 @@ class AssignTest(TestCase):
     def test_assign_jobs_for_each_day_in_a_week(self):
         result = get_week(FIRST, SECOND)
         expected = {
-            'monday': {'pr': 'e', 'webhelp': 'c'},
-            'tuesday': {'pr': 'c', 'webhelp': 'f'},
-            'wednesday': {'pr': 'b', 'webhelp': 'd'},
-            'thursday': {'pr': 'd', 'webhelp': 'a'},
-            'friday': {'pr': 'd', 'webhelp': 'b'},
+            'monday': {
+                'pr': {'person': 'e', 'source': ['d', 'f']},
+                'webhelp': {'person': 'c', 'source': ['a', 'b']}
+            },
+            'tuesday': {
+                'pr': {'person': 'c', 'source': ['a', 'b']},
+                'webhelp': {'person': 'f', 'source': ['d', 'e']}
+            },
+            'wednesday': {
+                'pr': {'person': 'b', 'source': ['a', 'c']},
+                'webhelp': {'person': 'd', 'source': ['e', 'f']}
+            },
+            'thursday': {
+                'pr': {'person': 'd', 'source': ['e', 'f']},
+                'webhelp': {'person': 'a', 'source': ['b', 'c']}
+            },
+            'friday': {
+                'pr': {'person': 'e', 'source': ['e', 'f']},
+                'webhelp': {'person': 'b', 'source': ['a', 'c']}
+            }
         }
-        self.assertEqual(result['monday']['pr']['person'], expected['monday']['pr'])
-        self.assertEqual(result['monday']['webhelp']['person'], expected['monday']['webhelp'])
-        self.assertEqual(result['tuesday']['pr']['person'], expected['tuesday']['pr'])
-        self.assertEqual(result['tuesday']['webhelp']['person'], expected['tuesday']['webhelp'])
-        self.assertEqual(result['wednesday']['pr']['person'], expected['wednesday']['pr'])
-        self.assertEqual(result['wednesday']['webhelp']['person'], expected['wednesday']['webhelp'])
-        self.assertEqual(result['thursday']['pr']['person'], expected['thursday']['pr'])
-        self.assertEqual(result['thursday']['webhelp']['person'], expected['thursday']['webhelp'])
-        self.assertEqual(result['friday']['pr']['person'], expected['friday']['pr'])
-        self.assertEqual(result['friday']['webhelp']['person'], expected['friday']['webhelp'])
+        self.assertEqual(result, expected)
 
     def test_people_cannot_do_same_job_two_days_in_a_row(self):
         result = get_week(FIRST, SECOND)
