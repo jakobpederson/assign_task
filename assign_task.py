@@ -1,17 +1,8 @@
 import random
 
 WEEK = ('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
+JOBS = ('pr', 'webhelp')
 
-
-def get_assignments():
-    result = {}
-    previous_day =[]
-    for day in WEEK:
-        people = get_people()
-        selection = compare_days(previous_day, people)
-        result[day] = {'pr': selection[0], 'webhelp': selection[1]}
-        previous_day = people
-    return result
 
 def get_people(first, second):
     select_1 = random.sample(first, 1)[0]
@@ -30,31 +21,18 @@ def assign_job(people):
         'webhelp': {'person': webhelp, 'source': people[webhelp]},
     }
 
-def compare_days(previous_group, group):
-    result = group
-    if previous_group:
-        pr = group[0] if group[0] != previous_group[0] else get_people([group[0]], number=1)[0]
-        webhelp = group[1] if group[1] != previous_group[1] else get_people([group[1]], number=1)[0]
-        if pr == webhelp:
-            webhelp = get_people([webhelp, previous_group[1]], number=1)[0]
-        result = [pr, webhelp]
-    return result
-
 def get_week(first, second):
-    result = {}
+    result = {day: {} for day in WEEK}
     for day in WEEK:
         people = get_people(first, second)
         jobs = assign_job(people)
-        result[day] = {
-            'pr': {
-                'person': jobs['pr']['person'],
-                'source': jobs['pr']['source'],
-            },
-            'webhelp': {
-                'person': jobs['webhelp']['person'],
-                'source': jobs['webhelp']['source'],
-            }
-        }
+        for val in JOBS:
+            result[day].update({
+                val: {
+                    'person': jobs[val]['person'],
+                    'source': jobs[val]['source'],
+                },
+            })
     result = compare_jobs(result)
     return result
 
@@ -67,7 +45,7 @@ def compare_jobs(result):
     return result
 
 def update_repeating_jobs(value, compare, result):
-    for val in ('pr', 'webhelp'):
+    for val in :
         job_1 = value[val]
         job_2 = compare[val]
         if job_1['person'] == job_2['person']:
