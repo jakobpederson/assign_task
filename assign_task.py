@@ -62,12 +62,14 @@ def compare_jobs(result):
     compare = WEEK[0]
     for day, value in result.items():
         if day != compare:
-            for val in ('pr', 'webhelp'):
-                result = update_repeating_jobs(value[val], result[compare][val], result)
+            result = update_repeating_jobs(value, result[compare], result)
         compare = day
     return result
 
-def update_repeating_jobs(job_1, job_2, result):
-    if job_1['person'] == job_2['person']:
-        job_1['person'] = random.sample(job_1['source'], 1)[0]
+def update_repeating_jobs(value, compare, result):
+    for val in ('pr', 'webhelp'):
+        job_1 = value[val]
+        job_2 = compare[val]
+        if job_1['person'] == job_2['person']:
+            job_1['person'] = random.sample(job_1['source'], 1)[0]
     return result
