@@ -43,14 +43,26 @@ def compare_days(previous_group, group):
     return result
 
 def get_week(first, second):
-    pass
-    # result = {}
-    # test_day = WEEK[0]
-    # for day in WEEK:
-    #     people = get_people(first, second)
-    #     jobs = assign_job(people)
-    #     if test_day != day:
-    #         if test_day['pr'] == jobs['pr']:
-    #     result[day] = jobs
-    # return result
-
+    result = {}
+    for day in WEEK:
+        people = get_people(first, second)
+        jobs = assign_job(people)
+        result[day] = {
+            'pr': {
+                'person': jobs['pr']['person'],
+                'source': jobs['pr']['source'],
+            },
+            'webhelp': {
+                'person': jobs['webhelp']['person'],
+                'source': jobs['webhelp']['source'],
+            }
+        }
+    compare = WEEK[0]
+    for day, value in result.items():
+        if day != compare:
+            if value['pr']['person'] == result[compare]['pr']['person']:
+                value['pr']['person'] = random.sample(value['pr']['source'], 1)
+            if value['webhelp']['person'] == result[compare]['webhelp']['person']:
+                value['webhelp']['person'] = random.sample(value['webhelp']['source'], 1)
+        compare = day
+    return result

@@ -32,17 +32,48 @@ class AssignTest(TestCase):
             'thursday': {'pr': 'd', 'webhelp': 'a'},
             'friday': {'pr': 'd', 'webhelp': 'b'},
         }
-        self.assertEqual(result, expected)
+        self.assertEqual(result['monday']['pr']['person'], expected['monday']['pr'])
+        self.assertEqual(result['monday']['webhelp']['person'], expected['monday']['webhelp'])
+        self.assertEqual(result['tuesday']['pr']['person'], expected['tuesday']['pr'])
+        self.assertEqual(result['tuesday']['webhelp']['person'], expected['tuesday']['webhelp'])
+        self.assertEqual(result['wednesday']['pr']['person'], expected['wednesday']['pr'])
+        self.assertEqual(result['wednesday']['webhelp']['person'], expected['wednesday']['webhelp'])
+        self.assertEqual(result['thursday']['pr']['person'], expected['thursday']['pr'])
+        self.assertEqual(result['thursday']['webhelp']['person'], expected['thursday']['webhelp'])
+        self.assertEqual(result['friday']['pr']['person'], expected['friday']['pr'])
+        self.assertEqual(result['friday']['webhelp']['person'], expected['friday']['webhelp'])
 
     def test_people_cannot_do_same_job_two_days_in_a_row(self):
         result = get_week(FIRST, SECOND)
-        self.assertTrue(result['monday']['pr'] != result['tuesday']['pr'])
-        self.assertTrue(result['tuesday']['pr'] != result['tuesday']['pr'])
-        self.assertTrue(result['wednesday']['pr'] != result['tuesday']['pr'])
-        self.assertTrue(result['thursday']['pr'] != result['tuesday']['pr'])
-        self.assertTrue(result['friday']['pr'] != result['tuesday']['pr'])
-        self.assertTrue(result['monday']['webhelp'] != result['monday']['webhelp'])
-        self.assertTrue(result['tuesday']['webhelp'] != result['tuesday']['webhelp'])
-        self.assertTrue(result['wednesday']['webhelp'] != result['wednesay']['webhelp'])
-        self.assertTrue(result['thursday']['webhelp'] != result['thursday']['webhelp'])
-        self.assertTrue(result['friday']['webhelp'] != result['friday']['webhelp'])
+        self.assertNotEqual(
+            result['monday']['pr']['person'],
+            result['tuesday']['pr']['person']
+        )
+        self.assertNotEqual(
+            result['monday']['webhelp']['person'],
+            result['tuesday']['webhelp']['person']
+        )
+        self.assertNotEqual(
+            result['tuesday']['pr']['person'],
+            result['wednesday']['pr']['person'],
+        )
+        self.assertNotEqual(
+            result['tuesday']['webhelp']['person'],
+            result['wednesday']['webhelp']['person'],
+        )
+        self.assertNotEqual(
+            result['wednesday']['pr']['person'],
+            result['thursday']['pr']['person'],
+        )
+        self.assertNotEqual(
+            result['wednesday']['webhelp']['person'],
+            result['thursday']['webhelp']['person'],
+        )
+        self.assertNotEqual(
+            result['thursday']['pr']['person'],
+            result['friday']['pr']['person'],
+        )
+        self.assertNotEqual(
+            result['thursday']['webhelp']['person'],
+            result['friday']['webhelp']['person'],
+        )
