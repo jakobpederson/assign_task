@@ -1,7 +1,5 @@
 import random
 
-PEOPLE = ('alice', 'bob', 'cat', 'dave')
-JUNIOR = ('edgar', 'frank', 'greg')
 WEEK = ('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
 
 
@@ -57,15 +55,19 @@ def get_week(first, second):
                 'source': jobs['webhelp']['source'],
             }
         }
+    result = compare_jobs(result)
+    return result
+
+def compare_jobs(result):
     compare = WEEK[0]
     for day, value in result.items():
         if day != compare:
             for val in ('pr', 'webhelp'):
-                result = compare_days(value[val], result[compare][val], result)
+                result = update_repeating_jobs(value[val], result[compare][val], result)
         compare = day
     return result
 
-def compare_days(job_1, job_2, result):
+def update_repeating_jobs(job_1, job_2, result):
     if job_1['person'] == job_2['person']:
         job_1['person'] = random.sample(job_1['source'], 1)[0]
     return result
