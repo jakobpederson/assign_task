@@ -1,4 +1,5 @@
 import random
+from collections import defaultdict
 
 WEEK = ('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
 JOBS = ('pr', 'webhelp')
@@ -22,7 +23,7 @@ def assign_job(people):
     }
 
 def get_week(first, second):
-    result = {day: {} for day in WEEK}
+    result = defaultdict(dict)
     for day in WEEK:
         people = get_people(first, second)
         jobs = assign_job(people)
@@ -45,7 +46,7 @@ def compare_jobs(result):
     return result
 
 def update_repeating_jobs(value, compare, result):
-    for val in :
+    for val in JOBS:
         job_1 = value[val]
         job_2 = compare[val]
         if job_1['person'] == job_2['person']:
