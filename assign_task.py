@@ -19,7 +19,9 @@ def get_people(exclude=None, number=2):
     exclude = exclude or []
     pr_pool = random.sample([PEOPLE, JUNIOR], 1)[0]
     webhelp_pool = PEOPLE if pr_pool != PEOPLE else JUNIOR
-    return (random.sample(pr_pool, 1)[0], random.sample(webhelp_pool, 1)[0])
+    pr_excluded = [x for x in pr_pool if x not in exclude]
+    webhelp_excluded = [x for x in webhelp_pool if x not in exclude]
+    return (random.sample(pr_excluded, 1)[0], random.sample(webhelp_excluded, 1)[0])
 
 def compare_days(previous_group, group):
     result = group
@@ -30,3 +32,7 @@ def compare_days(previous_group, group):
             webhelp = get_people([webhelp, previous_group[1]], number=1)[0]
         result = [pr, webhelp]
     return result
+
+
+def get_team():
+    pass

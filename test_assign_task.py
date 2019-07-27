@@ -46,15 +46,12 @@ class AssignTest(TestCase):
         result = compare_days(previous_group, group)
         self.assertEqual(result, ['cat', 'dave'])
 
-    def test_x(self):
-        result = get_assignments()
+    def test_one_selection_comes_from_PEOPLE_the_other_from_JUNIOR(self):
+        result = get_people()
         for key, val in result.items():
             if val['pr'] in PEOPLE:
                 print(val['pr'])
                 print(val['webhelp'])
                 self.assertTrue(val['webhelp'] in JUNIOR)
             else:
-                print(val['pr'])
-                print(val['webhelp'])
                 self.assertTrue(val['webhelp'] in PEOPLE)
-        self.fail('x')
