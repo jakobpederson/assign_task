@@ -15,13 +15,22 @@ def get_assignments():
         previous_day = people
     return result
 
-def get_people(exclude=None, number=2):
-    exclude = exclude or []
-    pr_pool = random.sample([PEOPLE, JUNIOR], 1)[0]
-    webhelp_pool = PEOPLE if pr_pool != PEOPLE else JUNIOR
-    pr_excluded = [x for x in pr_pool if x not in exclude]
-    webhelp_excluded = [x for x in webhelp_pool if x not in exclude]
-    return (random.sample(pr_excluded, 1)[0], random.sample(webhelp_excluded, 1)[0])
+def get_people(first, second):
+    select_1 = random.sample(first, 1)[0]
+    select_2 = random.sample(second, 1)[0]
+    return {
+        select_1: [person for person in first if person != select_1],
+        select_2: [person for person in second if person != select_2]
+    }
+
+def assign_job(people):
+    keys = list(people.keys())
+    pr = random.sample(keys, 1)[0]
+    webhelp = keys[0] if pr != keys[0] else keys[1]
+    return {
+        'pr': {'person': pr, 'source': people[pr]},
+        'webhelp': {'person': webhelp, 'source': people[webhelp]},
+    }
 
 def compare_days(previous_group, group):
     result = group
@@ -33,6 +42,15 @@ def compare_days(previous_group, group):
         result = [pr, webhelp]
     return result
 
-
-def get_team():
+def get_week(first, second):
     pass
+    # result = {}
+    # test_day = WEEK[0]
+    # for day in WEEK:
+    #     people = get_people(first, second)
+    #     jobs = assign_job(people)
+    #     if test_day != day:
+    #         if test_day['pr'] == jobs['pr']:
+    #     result[day] = jobs
+    # return result
+
